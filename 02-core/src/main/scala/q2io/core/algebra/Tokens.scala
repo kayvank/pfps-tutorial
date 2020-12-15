@@ -1,19 +1,17 @@
-package q2io.domain
+package q2io.core
 package algebra
 
 import cats.effect._
-
 import cats.effect.Sync
 import cats.syntax.all._
 import dev.profunktor.auth.jwt._
 import io.circe.syntax._
 import pdi.jwt._
+import scala.concurrent.duration.FiniteDuration
 
 import q2io.domain.effects.GenUUID
 import dev.profunktor.auth.jwt.JwtSecretKey
 import q2io.core.config.Config._
-import scala.concurrent.duration.FiniteDuration
-import pdi.jwt.JwtClaim
 
 trait Tokens[F[_]] {
   def create: F[JwtToken]
