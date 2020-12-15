@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+  q2io-net:
+    driver: bridge
+
+services:
+  postgres_db:
+    image: postgres:latest
+    restart: always
+    networks:
+      - q2io-net
+    environment:
+      POSTGRES_USER: q2io
+      POSTGRES_DB: q2io
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data/:/data
+      - ./redis/config/:/usr/local/etc/redis
+    command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+    depends_on:
+      - postgres_db
+    
