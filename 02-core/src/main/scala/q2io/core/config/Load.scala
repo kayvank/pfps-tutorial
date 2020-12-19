@@ -19,7 +19,7 @@ object Load {
     env("APP_ENV")
       .as[AppEnvironment]
       .flatMap {
-        case Test =>
+        case Local | Test =>
           default(
             redisUri = RedisURI("redis://localhost"),
             paymentUri = PaymentURI("https://payment.free.beeceptor.com")

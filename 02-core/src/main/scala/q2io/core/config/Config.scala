@@ -7,7 +7,6 @@ import eu.timepit.refined.types.numeric.PosInt
 import eu.timepit.refined.types.string.NonEmptyString
 import io.estatico.newtype.macros.newtype
 import scala.concurrent.duration._
-import dev.profunktor.redis4cats.config
 
 object Config {
 

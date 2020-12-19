@@ -22,19 +22,20 @@ object Brands {
   /* BracketThrow[F[_]] is just a type alias for Bracket[F, Throwable] */
   def apply[F[_]: Sync: BracketThrow: GenUUID](
       sessionPool: Resource[F, Session[F]]
-  ) = new Brands[F] {
+  ): F[Brands[F]] =
+    Sync[F].delay(new Brands[F] {
+      override def findAll: F[List[Brand]] =
+        sessionPool.use(_.execute((selectAll)))
 
-    override def findAll: F[List[Brand]] =
-      sessionPool.use(_.execute((selectAll)))
-
-    override def create(name: BrandName): F[Unit] = sessionPool.use { session =>
-      session.prepare(insertBrand).use { cmd =>
-        GenUUID[F].make[BrandId].flatMap { id =>
-          cmd.execute(Brand(id, name)).void
-        }
+      override def create(name: BrandName): F[Unit] = sessionPool.use {
+        session =>
+          session.prepare(insertBrand).use { cmd =>
+            GenUUID[F].make[BrandId].flatMap { id =>
+              cmd.execute(Brand(id, name)).void
+            }
+          }
       }
-    }
-  }
+    })
 }
 
 private object BrandQueries {

@@ -3,6 +3,7 @@ import sbt._
 object Dependencies {
   object V {
     val cats = "2.2.0"
+    val catsRetry = "2.0.0"
     val console4cats = "0.8.1"
     val catsEffect = "2.2.0"
     val catsMeowMtl = "0.4.1"
@@ -63,6 +64,7 @@ object Dependencies {
       "eu.timepit" %% "refined" % V.refined,
       "eu.timepit" %% "refined-cats" % V.refined,
       "io.chrisdavenport" %% "log4cats-slf4j" % V.log4cats,
+      "com.github.cb372" %% "cats-retry" % V.catsRetry,
       "org.rogach" %% "scallop" % V.scallop,
       "io.estatico" %% "newtype" % V.newtype,
       "com.olegpy" %% "better-monadic-for" % V.betterMonadicFor,

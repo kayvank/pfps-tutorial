@@ -15,18 +15,17 @@ object CompilerSettings {
         "-Xlint:infer-any",
         "-Xlint:adapted-args",
         "-Xlint:delayedinit-select",
-        "-Xlint:-unused",
+        // "-Xlint:-unused",
         "-unchecked",
-        // "-Ypartial-unification",
         "-Ymacro-annotations",
-        "-Ywarn-dead-code",
+        // "-Ywarn-dead-code",
         "-Ywarn-numeric-widen",
         "-Ywarn-macros:after",
-        "-Ywarn-unused:implicits",
-        "-Ywarn-unused:imports",
-        "-Ywarn-unused:locals",
-        "-Ywarn-unused:patvars",
-        "-Ywarn-unused:privates"
+        "-Ywarn-unused:implicits"
+        // "-Ywarn-unused:imports",
+        // "-Ywarn-unused:locals",
+        // "-Ywarn-unused:patvars",
+        // "-Ywarn-unused:privates"
       )
     }
   )

@@ -1,4 +1,4 @@
-package q2io.core.protocol
+package q2io.http
 
 import cats.syntax.all._
 import io.circe.Decoder
@@ -23,7 +23,5 @@ object decoder {
           }
         case Right(a) => f(a)
       }
-
   }
-
 }

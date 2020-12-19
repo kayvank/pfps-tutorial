@@ -1,7 +1,6 @@
 package q2io.core.algebra
 
 import cats.effect.Sync
-import cats.syntax.all._
 import javax.crypto.spec.{PBEKeySpec, SecretKeySpec}
 import javax.crypto.{Cipher, SecretKeyFactory}
 

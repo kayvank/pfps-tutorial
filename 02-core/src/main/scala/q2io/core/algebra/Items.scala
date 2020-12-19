@@ -30,8 +30,8 @@ object Items {
 
   import ItemQueries._
 
-  def apply[F[_]: Sync](sessionPool: Resource[F, Session[F]]): Items[F] =
-    new Items[F] {
+  def apply[F[_]: Sync](sessionPool: Resource[F, Session[F]]): F[Items[F]] =
+    Sync[F].delay(new Items[F] {
       override def findAll: F[List[Item]] =
         sessionPool.use(_.execute((selectAll)))
 
@@ -77,7 +77,7 @@ object Items {
         sessionPool.use { session =>
           session.prepare(updateItem).use { cmd => cmd.execute(item).void }
         }
-    }
+    })
 }
 
 private object ItemQueries {

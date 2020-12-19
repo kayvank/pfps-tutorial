@@ -39,7 +39,7 @@ lazy val commonSettings = projectSettings ++ CompilerSettings.options
 compileWithTodolistSettings
 
 lazy val root = (project in file("."))
-  .aggregate(domain, core, cli, http)
+  .aggregate(domain, core, cli, http, checkout, modules)
   .settings(
     publish / skip := true
   )
@@ -65,18 +65,7 @@ lazy val core = (project in file("02-core"))
   .enablePlugins(JavaAppPackaging)
   .dependsOn(domain % "compile->compile;test->test")
 
-lazy val cli = (project in file("03-cli"))
-  .settings(commonSettings: _*)
-  .settings(dockerSettings: _*)
-  .enablePlugins(JavaAppPackaging)
-  .enablePlugins(DockerPlugin)
-  .settings(libraryDependencies ++= Dependencies.core ++ Dependencies.test)
-  .dependsOn(
-    domain % "compile->compile;test->test",
-    core % "compile->compile;test->test"
-  )
-
-lazy val http = (project in file("03-http"))
+lazy val checkout = (project in file("03-checkout"))
   .settings(commonSettings: _*)
   .settings(dockerSettings: _*)
   .enablePlugins(JavaAppPackaging)
@@ -87,6 +76,47 @@ lazy val http = (project in file("03-http"))
   .dependsOn(
     domain % "compile->compile;test->test",
     core % "compile->compile;test->test"
+  )
+
+lazy val cli = (project in file("04-cli"))
+  .settings(commonSettings: _*)
+  .settings(dockerSettings: _*)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
+  .settings(libraryDependencies ++= Dependencies.core ++ Dependencies.test)
+  .dependsOn(
+    domain % "compile->compile;test->test",
+    core % "compile->compile;test->test",
+    checkout % "compile->compile;test->test"
+  )
+
+lazy val http = (project in file("04-http"))
+  .settings(commonSettings: _*)
+  .settings(dockerSettings: _*)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
+  .settings(
+    libraryDependencies ++= Dependencies.core ++ Dependencies.api ++ Dependencies.test
+  )
+  .dependsOn(
+    domain % "compile->compile;test->test",
+    core % "compile->compile;test->test",
+    checkout % "compile->compile;test->test"
+  )
+
+lazy val modules = (project in file("05-modules"))
+  .settings(commonSettings: _*)
+  .settings(dockerSettings: _*)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
+  .settings(
+    libraryDependencies ++= Dependencies.core ++ Dependencies.api ++ Dependencies.test
+  )
+  .dependsOn(
+    domain % "compile->compile;test->test",
+    core % "compile->compile;test->test",
+    checkout % "compile->compile;test->test",
+    http % "compile->compile;test->test"
   )
 
 enablePlugins(MicrositesPlugin)

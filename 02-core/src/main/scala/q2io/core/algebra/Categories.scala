@@ -9,17 +9,30 @@ import skunk.implicits._
 
 import q2io.domain.ext.Skunkx._
 import q2io.domain.Category._
+import q2io.domain.effects.GenUUID
 
 trait Categories[F[_]] {
   def findAll: F[List[Category]]
   def create(name: CategoryName): F[Unit]
 }
 
+import CategoryQuerie._
 object Categories {
-  def apply[F[_]: Sync] = new Categories[F] {
-    def findAll: F[List[Category]] = ???
-    def create(name: CategoryName): F[Unit] = ???
-  }
+  def apply[F[_]: Sync](
+      sessionPool: Resource[F, Session[F]]
+  ) = Sync[F].delay(
+    new Categories[F] {
+      override def findAll = sessionPool.use(_.execute(selectAll))
+      override def create(name: CategoryName): F[Unit] =
+        sessionPool.use { session =>
+          session.prepare(insertCategory).use { cmd =>
+            GenUUID[F].make[CategoryId].flatMap { id =>
+              cmd.execute(Category(id, name)).void
+            }
+          }
+        }
+    }
+  )
 }
 
 private object CategoryQuerie {

@@ -1,4 +1,4 @@
-package q2io.http.clients
+package q2io.checkout.clients
 
 import q2io.domain.Payment.Payment
 import q2io.domain.Order.PaymentId

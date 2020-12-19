@@ -9,6 +9,8 @@ import io.estatico.newtype.Coercible
 import io.estatico.newtype.ops._
 import org.http4s.EntityEncoder
 import org.http4s.circe.jsonEncoderOf
+import squants.market.{Money, USD}
+
 import q2io.domain.Auth._
 import q2io.domain.Brand._
 import q2io.domain.Cart._
@@ -17,9 +19,9 @@ import q2io.domain.Checkout._
 import q2io.domain.Healthcheck._
 import q2io.domain.Item._
 import q2io.domain.Order._
-import q2io.domain.Payment.Payment
+import q2io.domain.Payment._
+import q2io.domain.ext.Refined._
 import q2io.domain.User._
-import squants.market.{Money, USD}
 
 object json extends JsonCodecs {
   implicit def deriveEntityEncoder[F[_]: Applicative, A: Encoder]
@@ -92,8 +94,8 @@ trait JsonCodecs {
   implicit val userDecoder: Decoder[User] = deriveDecoder[User]
   implicit val userEncoder: Encoder[User] = deriveEncoder[User]
 
-//  implicit val cardDecoder: Decoder[Card] = deriveDecoder[Card]
   implicit val cardEncoder: Encoder[Card] = deriveEncoder[Card]
+  implicit val cardDecoder: Decoder[Card] = deriveDecoder[Card]
 
   implicit val paymentEncoder: Encoder[Payment] = deriveEncoder[Payment]
 

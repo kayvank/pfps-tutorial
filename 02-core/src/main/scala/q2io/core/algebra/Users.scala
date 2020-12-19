@@ -9,8 +9,6 @@ import skunk.implicits._
 import q2io.domain.Auth._
 import q2io.domain.User._
 import q2io.domain.ext.Skunkx._
-import q2io.domain.effects.Effects._
-import q2io.core.protocol.json._
 import q2io.domain.effects.GenUUID
 
 trait Users[F[_]] {
