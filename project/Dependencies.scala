@@ -28,6 +28,9 @@ object Dependencies {
     // val squant = "1.7.0-SNAPSHOT"
     val skunk = "0.0.21"
     val squant = "1.7.0+"
+    val scalaCheck = "1.15.2"
+    val scalaTest = "3.2.3"
+    val scalaTestPlus = "3.2.2.0"
   }
 
   def circe(artifact: String): ModuleID =
@@ -85,8 +88,9 @@ object Dependencies {
     Seq(
       "com.lihaoyi" %% "ammonite-ops" % "2.1.4" % "test",
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheck_shapeless % "test",
-      "org.specs2" %% "specs2-core" % V.specs2 % "test",
-      "org.specs2" %% "specs2-scalacheck" % V.specs2 % "test"
+      "org.scalacheck" %% "scalacheck" % V.scalaCheck,
+      "org.scalatest" %% "scalatest" % V.scalaTest,
+      "org.scalatestplus" %% "scalacheck-1-14" % V.scalaTestPlus
     )
 
   // compilerPlugins = Seq(
