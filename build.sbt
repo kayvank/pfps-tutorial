@@ -39,7 +39,7 @@ lazy val commonSettings = projectSettings ++ CompilerSettings.options
 compileWithTodolistSettings
 
 lazy val root = (project in file("."))
-  .aggregate(domain, core, cli, http, checkout, modules)
+  .aggregate(domain, core, cli, http, checkout, modules, bootstrap)
   .settings(
     publish / skip := true
   )
@@ -117,6 +117,22 @@ lazy val modules = (project in file("05-modules"))
     core % "compile->compile;test->test",
     checkout % "compile->compile;test->test",
     http % "compile->compile;test->test"
+  )
+
+lazy val bootstrap = (project in file("06-bootstrap"))
+  .settings(commonSettings: _*)
+  .settings(dockerSettings: _*)
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
+  .settings(
+    libraryDependencies ++= Dependencies.core ++ Dependencies.api ++ Dependencies.test
+  )
+  .dependsOn(
+    domain % "compile->compile;test->test",
+    core % "compile->compile;test->test",
+    checkout % "compile->compile;test->test",
+    http % "compile->compile;test->test",
+    modules % "compile->compile;test->test"
   )
 
 enablePlugins(MicrositesPlugin)

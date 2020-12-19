@@ -1,8 +1,7 @@
-package q2io.core
+package q2io.bootstrap
 
 import cats.effect._
 import cats.syntax.all._
-import config.Config._
 import dev.profunktor.redis4cats.{Redis, RedisCommands}
 import dev.profunktor.redis4cats.log4cats._
 import eu.timepit.refined.auto._
@@ -13,9 +12,11 @@ import org.http4s.client.blaze.BlazeClientBuilder
 import scala.concurrent.ExecutionContext
 import skunk._
 
+import q2io.core.config.Config._
+
 final case class AppResources[F[_]](
     client: Client[F],
-    psq: Resource[F, Session[F]],
+    psql: Resource[F, Session[F]],
     redis: RedisCommands[F, String, String]
 )
 object AppResources {
