@@ -11,10 +11,9 @@ import pdi.jwt.JwtClaim
 
 import q2io.domain.User._
 import q2io.domain.Auth._
-import q2io.domain.effects.GenUUID
 import q2io.core.config.Config.TokenExpiration
 import q2io.core.algebra.Tokens
-import q2io.domain.effects.Effects.MonadThrow
+import q2io.domain.effects._
 import q2io.core.protocol.json._
 
 trait Auth[F[_]] {

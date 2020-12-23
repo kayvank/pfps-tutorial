@@ -15,9 +15,8 @@ import q2io.domain.Checkout._
 import q2io.domain.Order.{PaymentId, _}
 import q2io.domain.Payment._
 import q2io.domain.User._
-import q2io.domain.effects.Background
 
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 import q2io.domain.Cart.CartTotal
 
 final class CheckoutProgram[F[_]: Background: Logger: MonadThrow: Timer](

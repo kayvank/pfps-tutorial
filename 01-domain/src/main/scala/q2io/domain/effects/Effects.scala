@@ -1,10 +1,9 @@
 package q2io.domain
-package effects
 
 import cats.{ApplicativeError, MonadError}
 import cats.effect.Bracket
 
-package object Effects {
+package object effects {
 
   type BracketThrow[F[_]] = Bracket[F, Throwable]
 

@@ -15,7 +15,7 @@ import q2io.core.algebra.Users
 import q2io.core.algebra.UserAuth
 import q2io.core.algebra.Crypto
 import q2io.core.algebra.Tokens
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 import q2io.domain.Auth._
 import q2io.domain.User._
 

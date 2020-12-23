@@ -8,8 +8,7 @@ import dev.profunktor.redis4cats.RedisCommands
 import q2io.domain.User._
 import q2io.domain.Item._
 import q2io.core.config.Config.ShoppingCartExpiration
-import q2io.domain.effects.GenUUID
-import q2io.domain.effects.Effects.{MonadThrow, ApThrow}
+import q2io.domain.effects._
 import q2io.domain.Cart._
 
 trait ShoppingCart[F[_]] {

@@ -5,7 +5,7 @@ import io.circe.Decoder
 import org.http4s._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.circe._
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 
 object decoder {
 

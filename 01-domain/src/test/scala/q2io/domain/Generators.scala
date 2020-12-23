@@ -41,9 +41,9 @@ object Generators {
   } yield Category(uuid = i, name = n)
 
   val itemGen: Gen[Item] = for {
-    i <- cbUuid[ItemId]
     n <- cbStr[ItemName]
     d <- cbStr[ItemDescription]
+    i <- cbUuid[ItemId]
     p <- genMoney
     b <- brandGen
     c <- categoryGen
@@ -56,16 +56,16 @@ object Generators {
     category = c
   ))
 
-  val cartTotalGen: Gen[CartTotal] =
-    for {
-      i <- Gen.nonEmptyListOf(cartItemGen)
-      t <- genMoney
-    } yield CartTotal(i, t)
-
   val cartItemGen: Gen[CartItem] = for {
     i <- itemGen
     q <- cbInt[Quantity]
   } yield (CartItem(item = i, quantity = q))
+
+  val cartTotalGen: Gen[CartTotal] =
+    for {
+      i <- Gen.nonEmptyListOf(cartItemGen)
+      t <- genMoney
+    } yield CartTotal(items = i, total = t)
 
   val itemMapGen: Gen[(ItemId, Quantity)] = for {
     i <- cbUuid[ItemId]

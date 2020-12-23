@@ -6,7 +6,6 @@ import cats.syntax.all._
 import io.estatico.newtype.Coercible
 import io.estatico.newtype.ops._
 import java.util.UUID
-import Effects._
 
 trait GenUUID[F[_]] {
   def make: F[UUID]

@@ -9,7 +9,7 @@ import org.http4s.server._
 
 import q2io.core.protocol.json._
 import q2io.http.decoder._
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 import q2io.domain.Brand._
 import q2io.core.algebra.Brands
 import q2io.domain.User.AdminUser

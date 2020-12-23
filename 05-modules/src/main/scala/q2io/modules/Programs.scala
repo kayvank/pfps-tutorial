@@ -7,7 +7,7 @@ import retry.RetryPolicy
 import retry.RetryPolicies._
 
 import q2io.core.config.Config._
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 import q2io.domain.effects.Background
 import q2io.checkout.program.CheckoutProgram
 

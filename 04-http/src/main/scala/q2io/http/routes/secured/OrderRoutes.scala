@@ -11,7 +11,7 @@ import org.http4s.server.Router
 import q2io.domain.User._
 import q2io.core.algebra.Orders
 import q2io.domain.Order._
-import q2io.domain.effects.Effects._
+import q2io.domain.effects._
 import q2io.http.decoder._
 import q2io.core.protocol.json._
 

@@ -56,6 +56,7 @@ object Items {
         for {
           sn <- fs2.Stream.resource(sessionPool)
           ps <- fs2.Stream.resource(sn.prepare(selectByBrand))
+
           rs <- ps.stream(brandName, 1024)
         } yield (rs)
 
